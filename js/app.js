@@ -52,10 +52,17 @@ Player.prototype.reset = function () {
 
 };
 
+// check if objects a and b collide
+var collision = function(a, b) {
+  return (a.x < (b.x + 50) &&
+          (a.x + 50) > b.x &&
+          a.y < (b.y + 30) &&
+          (a.y + 30) > b.y);
+}
 
 Player.prototype.collision = function () {
   for (var i = 0; i < allEnemies.length; i++) {
-    if (this.x < allEnemies[i].x + 50 && this.x + 50 > allEnemies[i].x && this.y < allEnemies[i].y + 30 && this.y + 30 > allEnemies[i].y) {
+    if (collision(this, allEnemies[i])) {
       alert("Game Over!");
       this.reset();
       break;
@@ -63,8 +70,10 @@ Player.prototype.collision = function () {
   }
 };
 
+
 Player.prototype.update = function () {
   if (this.y <= 40) {
+    alert("Congratulations! You defeated the bugs!!!")
     this.reset();
   }
   this.collision();
