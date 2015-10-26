@@ -9,3 +9,6 @@ The goal of the game is for the Player to cross the road and reach the water. On
 The Player needs to reach the water without colliding with any of the bugs. If the collision happens the game is reset and the Player is moved back to the start. 
 
 The Player is manipulated via up, down, left, right keys on the keyboard. 
+
+** This project is implemented as Front-End Nano Degree assignment. 
+** The project was made with the help of the Students' Forum and Forum Mentors. 
