@@ -1,66 +1,62 @@
-// Hello.
-//
-// This is JSHint, a tool that helps to detect errors and potential
-// problems in your JavaScript code.
-//
-// To start, simply enter some JavaScript anywhere on this page. Your
-// report will appear on the right side.
-//
-// Additionally, you can toggle specific options in the Configure
-// menu.
-
-function Enemy(x, y, speed) {
+// This function initiates the enemy, sets its initial location
+//and the image
+function Enemy(x, y) {
   this.x = x;
   this.y = y;
   this.speed = Math.floor(Math.random() * (500 - 100) + 100);
   this.sprite = 'images/enemy-bug.png';
 }
 
-Enemy.prototype.update = function (dt) {
+// The update() method updates the enemy's location and sets its speed to a random number
+Enemy.prototype.update = function(dt) {
   this.x += (this.speed + 100) * dt;
   if (this.x > 500) {
     this.x = -150;
     this.speed = Math.random() * (500 - 100) + 100;
-
   }
 };
 
-Enemy.prototype.render = function () {
+// The render() method renders the enemy on the canvas
+Enemy.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// three instances of enemy that are defined as bugs are created
 var bug1 = new Enemy(-375, 240, this.speed);
 var bug2 = new Enemy(-320, 130, this.speed);
 var bug3 = new Enemy(140, 40, this.speed);
 var allEnemies = [bug1, bug2, bug3];
-//allEnemies.push();
 
 
-function Player(x, y, sprite) {
+//this function initiates the player object, sets its initial location and its sprite
+function Player(x, y) {
   this.x = x;
   this.y = y;
   this.sprite = "images/char-horn-girl.png";
 }
 
-Player.prototype.render = function () {
+// the render() method renders the player on the canvas
+Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Player.prototype.reset = function () {
+//the reset() method resets the position of the player once the game is over or the player reaches the water
+Player.prototype.reset = function() {
   this.x = 200;
   this.y = 400;
 
 };
 
-// check if objects a and b collide
+// this function checks if objects a and b collide
 var collision = function(a, b) {
   return (a.x < (b.x + 50) &&
           (a.x + 50) > b.x &&
           a.y < (b.y + 30) &&
           (a.y + 30) > b.y);
-}
+};
 
-Player.prototype.collision = function () {
+// the collision() method handles collision between the enemy and the player. // If they collide the game is over and the player's position is reset to its // initial position
+Player.prototype.collision = function() {
   for (var i = 0; i < allEnemies.length; i++) {
     if (collision(this, allEnemies[i])) {
       alert("Game Over!");
@@ -70,16 +66,17 @@ Player.prototype.collision = function () {
   }
 };
 
-
-Player.prototype.update = function () {
+// the update() method resets the player's position if the player reaches the // water as well as uses the collision() method if the player collides.
+Player.prototype.update = function() {
   if (this.y <= 40) {
-    alert("Congratulations! You defeated the bugs!!!")
+    alert("Congratulations! You defeated the bugs!!!");
     this.reset();
   }
   this.collision();
 };
 
-
+// the handleInput() method moves the player over the canvas using the keys,
+// based on user input.
 Player.prototype.handleInput = function (keyCode) {
   switch (keyCode) {
   case 'left':
@@ -106,9 +103,11 @@ Player.prototype.handleInput = function (keyCode) {
 
 };
 
+// An instance of a player is created
 var player = new Player(200, 400);
 
-
+// An event listener that 'listens' for user input, key press and sends the
+//keys to the handleInput() method.
 document.addEventListener('keyup', function (e) {
   var allowedKeys = {
     37: 'left',
