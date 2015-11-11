@@ -12,3 +12,6 @@ The Player is manipulated via up, down, left, right keys on the keyboard.
 
 ** This project is implemented as Front-End Nano Degree assignment. 
 ** The project was made with the help of the Students' Forum and Forum Mentors. 
+
+
+![arcade](https://cloud.githubusercontent.com/assets/10465533/11087731/f7ce9ce4-885c-11e5-9cc6-b6dfdc423404.png)
